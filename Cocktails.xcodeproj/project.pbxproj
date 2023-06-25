@@ -16,6 +16,7 @@
 		B573F4B92A48836000E5A61C /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = B573F4B82A48836000E5A61C /* RxMoya */; };
 		B573F4BC2A48837D00E5A61C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B573F4BB2A48837D00E5A61C /* RxCocoa */; };
 		B573F4BE2A48837D00E5A61C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B573F4BD2A48837D00E5A61C /* RxSwift */; };
+		B573F4C02A48841B00E5A61C /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4BF2A48841B00E5A61C /* CustomSegmentedControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		B573F4A42A487D6600E5A61C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B573F4A72A487D6600E5A61C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B573F4A92A487D6600E5A61C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B573F4BF2A48841B00E5A61C /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				B573F49F2A487D6400E5A61C /* MainViewController.swift */,
+				B573F4BF2A48841B00E5A61C /* CustomSegmentedControl.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			files = (
 				B573F4A02A487D6400E5A61C /* MainViewController.swift in Sources */,
 				B573F49C2A487D6400E5A61C /* AppDelegate.swift in Sources */,
+				B573F4C02A48841B00E5A61C /* CustomSegmentedControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
