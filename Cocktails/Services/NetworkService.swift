@@ -16,7 +16,7 @@ class NetworkService {
     func fetchDrinks(for category: String) -> Observable<DrinksResponse> {
         return Observable.create { observer in
             let parameters = ["a": category]
-            let request = AF.request(Constants.urlString, parameters: parameters)
+            let request = AF.request(Constants.urlString + "filter.php", parameters: parameters)
                 .validate()
                 .responseDecodable(of: DrinksResponse.self) { response in
                     switch response.result {
@@ -36,7 +36,7 @@ class NetworkService {
     func fetchDrinkDetail(by id: String) -> Observable<DrinkDetail> {
         return Observable.create { observer in
             let parameters = ["i": id]
-            let request = AF.request("https://www.thecocktaildb.com/api/json/v1/1/lookup.php", parameters: parameters)
+            let request = AF.request(Constants.urlString + "lookup.php", parameters: parameters)
                 .validate()
                 .responseDecodable(of: DrinkDetailResponse.self) { response in
                     switch response.result {

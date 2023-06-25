@@ -54,4 +54,42 @@ class DrinksViewModel {
             })
             .disposed(by: disposeBag)
     }
+    
+    func fetchDrinksForRefresh(for category: String, filter: String = "") {
+        let categoryKey = category.replacingOccurrences(of: "-", with: "_")
+
+        if let cachedDrinks = cache[categoryKey] {
+            let filteredDrinks = filter.isEmpty ? cachedDrinks : cachedDrinks.filter { $0.strDrink.lowercased().contains(filter.lowercased()) }
+            drinks.accept(filteredDrinks.shuffled())
+            return
+        }
+
+        isLoading.accept(true)
+        NetworkService.shared.fetchDrinks(for: categoryKey)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] drinksResponse in
+                guard let self = self else { return }
+
+                var drinks = drinksResponse.drinks
+                drinks.shuffle()
+                self.cache[categoryKey] = drinks
+
+                let filteredDrinks = filter.isEmpty ? drinks : drinks.filter { $0.strDrink.lowercased().contains(filter.lowercased()) }
+                self.drinks.accept(filteredDrinks)
+
+                let urls = drinks.compactMap { URL(string: $0.strDrinkThumb) }
+                ImagePrefetcher(urls: urls).start()
+
+                Observable.just(())
+                    .delay(.seconds(1), scheduler: MainScheduler.instance)
+                    .subscribe(onNext: { _ in
+                        self.isLoading.accept(false)
+                    })
+                    .disposed(by: self.disposeBag)
+            }, onError: { [weak self] error in
+                print(error)
+                self?.isLoading.accept(false)
+            })
+            .disposed(by: disposeBag)
+    }
 }

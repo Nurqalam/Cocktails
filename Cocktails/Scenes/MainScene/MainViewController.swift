@@ -25,6 +25,23 @@ class MainViewController: ThemedViewController {
     private let disposeBag = DisposeBag()
 
     // MARK: - Outlets
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .gray
+        refreshControl.attributedTitle = NSAttributedString(string: Constants.refreshMessage)
+        return refreshControl
+    }()
+
+    private lazy var scrollUpButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitle("↑", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 24)
+        button.backgroundColor = .gray
+        button.layer.cornerRadius = 24
+        button.addTarget(self, action: #selector(scrollToTop), for: .touchUpInside)
+        return button
+    }()
+
     private var animationView: LottieAnimationView = {
         let view = LottieAnimationView()
         return view
@@ -87,6 +104,15 @@ class MainViewController: ThemedViewController {
         setupSearchBar()
     }
     
+    @objc private func refreshData() {
+        viewModel.fetchDrinksForRefresh(for: items[selectedIndex.value])
+        refreshControl.endRefreshing()
+    }
+
+    @objc private func scrollToTop() {
+        collectionView.setContentOffset(.zero, animated: true)
+    }
+
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -141,6 +167,14 @@ class MainViewController: ThemedViewController {
                 self.navigationController?.pushViewController(detailsVC, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        collectionView.rx.contentOffset
+            .map { $0.y <= 0 }
+            .bind(to: scrollUpButton.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
     }
 
     private func setupSegmentedControl() {
@@ -174,6 +208,7 @@ class MainViewController: ThemedViewController {
         view.addSubview(searchBar)
         view.addSubview(collectionView)
         view.addSubview(animationView)
+        view.addSubview(scrollUpButton)
 
         if let segmentedControl = segmentedControl {
             view.addSubview(segmentedControl)
@@ -208,6 +243,12 @@ class MainViewController: ThemedViewController {
         animationView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
+        }
+        
+        scrollUpButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-10)
+            make.trailing.equalToSuperview().offset(-10)
+            make.width.height.equalTo(48)
         }
     }
 }
