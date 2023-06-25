@@ -12,6 +12,7 @@ import SnapKit
 import Lottie
 
 class MainViewController: ThemedViewController {
+    // MARK: - Properties
     let items = [Constants.nonAlcoholicCategory, Constants.alcoholicCategory]
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
 
@@ -23,6 +24,7 @@ class MainViewController: ThemedViewController {
     private var isAnimationSetup = false
     private let disposeBag = DisposeBag()
 
+    // MARK: - Outlets
     private var animationView: LottieAnimationView = {
         let view = LottieAnimationView()
         return view
@@ -43,6 +45,7 @@ class MainViewController: ThemedViewController {
         return bar
     }()
 
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -70,6 +73,7 @@ class MainViewController: ThemedViewController {
         collectionView.backgroundColor = theme.backgroundDefault
     }
     
+    // MARK: - Private methods
     private func setup() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false

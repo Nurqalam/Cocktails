@@ -19,4 +19,8 @@ extension UIColor {
     static var error: UIColor {
         return UIColor(red: 0.702, green: 0.149, blue: 0.118, alpha: 1)
     }
+    
+    static var backButtonBackground: UIColor {
+        return UIColor(red: 0.925, green: 0.745, blue: 0.263, alpha: 0.3)
+    }
 }

@@ -94,10 +94,10 @@
 		B573F49A2A487D6400E5A61C /* Cocktails */ = {
 			isa = PBXGroup;
 			children = (
-				B573F4DF2A4889E000E5A61C /* Services */,
-				B573F4D12A48889700E5A61C /* Scenes */,
-				B573F4C12A48856700E5A61C /* Extensions */,
 				B573F4AF2A48814600E5A61C /* Application */,
+				B573F4D12A48889700E5A61C /* Scenes */,
+				B573F4DF2A4889E000E5A61C /* Services */,
+				B573F4C12A48856700E5A61C /* Extensions */,
 				B573F4B12A48819400E5A61C /* Helpers */,
 			);
 			path = Cocktails;
@@ -153,8 +153,8 @@
 		B573F4D12A48889700E5A61C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				B573F4E52A488C9700E5A61C /* DetailsScene */,
 				B573F4D22A4888A100E5A61C /* MainScene */,
+				B573F4E52A488C9700E5A61C /* DetailsScene */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";

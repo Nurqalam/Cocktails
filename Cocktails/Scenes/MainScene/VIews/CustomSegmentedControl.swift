@@ -11,6 +11,7 @@ import RxSwift
 import SnapKit
 
 class CustomSegmentedControl: ThemedView {
+    // MARK: - Outlets
     private var buttonTitles: [String] = []
     private var buttons: [UIButton] = []
     private var selectorView: UIView?
@@ -19,6 +20,7 @@ class CustomSegmentedControl: ThemedView {
         
     let selectedSegmentIndex = BehaviorRelay<Int>(value: 0)
 
+    // MARK: - Init
     init(frame: CGRect, buttonTitles: [String]) {
         self.buttonTitles = buttonTitles
         super.init(frame: frame)
@@ -54,6 +56,7 @@ class CustomSegmentedControl: ThemedView {
         self.backgroundColor = theme.cover
     }
     
+    // MARK: - Private methods
     private func configureButtons() {
         buttons.removeAll()
         buttonsContainer.subviews.forEach({$0.removeFromSuperview()})
