@@ -32,4 +32,28 @@ class NetworkService {
             }
         }
     }
+    
+    func fetchDrinkDetail(by id: String) -> Observable<DrinkDetail> {
+        return Observable.create { observer in
+            let parameters = ["i": id]
+            let request = AF.request("https://www.thecocktaildb.com/api/json/v1/1/lookup.php", parameters: parameters)
+                .validate()
+                .responseDecodable(of: DrinkDetailResponse.self) { response in
+                    switch response.result {
+                    case .success(let drinkDetailResponse):
+                        guard let drinkDetail = drinkDetailResponse.drinks.first else {
+                            observer.onError(NSError(domain: "com.example.myApp", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to parse drink detail"]))
+                            return
+                        }
+                        observer.onNext(drinkDetail)
+                        observer.onCompleted()
+                    case .failure(let error):
+                        observer.onError(error)
+                    }
+                }
+            return Disposables.create {
+                request.cancel()
+            }
+        }
+    }
 }

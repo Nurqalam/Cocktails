@@ -29,6 +29,9 @@
 		B573F4DE2A4889C400E5A61C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B573F4DD2A4889C400E5A61C /* Lottie */; };
 		B573F4E12A4889ED00E5A61C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4E02A4889ED00E5A61C /* NetworkService.swift */; };
 		B573F4E42A488A4700E5A61C /* DrinksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4E32A488A4700E5A61C /* DrinksResponse.swift */; };
+		B573F4E72A488CD200E5A61C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4E62A488CD200E5A61C /* DetailsViewController.swift */; };
+		B573F4EB2A488CFB00E5A61C /* DrinkDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4EA2A488CFB00E5A61C /* DrinkDetailResponse.swift */; };
+		B573F4ED2A488D1A00E5A61C /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4EC2A488D1A00E5A61C /* DetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +52,9 @@
 		B573F4D72A48894600E5A61C /* DrinksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksViewModel.swift; sourceTree = "<group>"; };
 		B573F4E02A4889ED00E5A61C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B573F4E32A488A4700E5A61C /* DrinksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksResponse.swift; sourceTree = "<group>"; };
+		B573F4E62A488CD200E5A61C /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		B573F4EA2A488CFB00E5A61C /* DrinkDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkDetailResponse.swift; sourceTree = "<group>"; };
+		B573F4EC2A488D1A00E5A61C /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,14 +113,6 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		B573F4B02A48818300E5A61C /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				B573F49F2A487D6400E5A61C /* MainViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
 		B573F4B12A48819400E5A61C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +153,7 @@
 		B573F4D12A48889700E5A61C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B573F4E52A488C9700E5A61C /* DetailsScene */,
 				B573F4D22A4888A100E5A61C /* MainScene */,
 			);
 			path = Scenes;
@@ -163,10 +162,10 @@
 		B573F4D22A4888A100E5A61C /* MainScene */ = {
 			isa = PBXGroup;
 			children = (
+				B573F49F2A487D6400E5A61C /* MainViewController.swift */,
 				B573F4E22A488A3A00E5A61C /* Models */,
 				B573F4D62A48893000E5A61C /* ViewModels */,
 				B573F4D32A4888B900E5A61C /* VIews */,
-				B573F4B02A48818300E5A61C /* ViewControllers */,
 			);
 			path = MainScene;
 			sourceTree = "<group>";
@@ -200,6 +199,32 @@
 			isa = PBXGroup;
 			children = (
 				B573F4E32A488A4700E5A61C /* DrinksResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B573F4E52A488C9700E5A61C /* DetailsScene */ = {
+			isa = PBXGroup;
+			children = (
+				B573F4E62A488CD200E5A61C /* DetailsViewController.swift */,
+				B573F4E92A488CE600E5A61C /* Models */,
+				B573F4E82A488CDC00E5A61C /* ViewModels */,
+			);
+			path = DetailsScene;
+			sourceTree = "<group>";
+		};
+		B573F4E82A488CDC00E5A61C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B573F4EC2A488D1A00E5A61C /* DetailsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B573F4E92A488CE600E5A61C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B573F4EA2A488CFB00E5A61C /* DrinkDetailResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,6 +318,8 @@
 			files = (
 				B573F4E12A4889ED00E5A61C /* NetworkService.swift in Sources */,
 				B573F4A02A487D6400E5A61C /* MainViewController.swift in Sources */,
+				B573F4ED2A488D1A00E5A61C /* DetailsViewModel.swift in Sources */,
+				B573F4EB2A488CFB00E5A61C /* DrinkDetailResponse.swift in Sources */,
 				B573F4D52A4888D800E5A61C /* CustomCollectionViewCell.swift in Sources */,
 				B573F4C92A4885B200E5A61C /* ThemedViewController.swift in Sources */,
 				B573F49C2A487D6400E5A61C /* AppDelegate.swift in Sources */,
@@ -302,6 +329,7 @@
 				B573F4C32A48857100E5A61C /* UIColor+extension.swift in Sources */,
 				B573F4E42A488A4700E5A61C /* DrinksResponse.swift in Sources */,
 				B573F4D02A4887B100E5A61C /* Constants.swift in Sources */,
+				B573F4E72A488CD200E5A61C /* DetailsViewController.swift in Sources */,
 				B573F4D82A48894600E5A61C /* DrinksViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

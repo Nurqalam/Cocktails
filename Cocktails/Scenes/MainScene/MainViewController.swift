@@ -71,8 +71,6 @@ class MainViewController: ThemedViewController {
     }
     
     private func setup() {
-        
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
@@ -134,7 +132,9 @@ class MainViewController: ThemedViewController {
         collectionView.rx.itemSelected
             .bind { [weak self] indexPath in
                 guard let self = self, let cell = self.collectionView.cellForItem(at: indexPath) as? CustomCollectionViewCell else { return }
-                print(indexPath.row)
+                let detailsVC = DetailsViewController()
+                detailsVC.viewModel = DetailsViewModel(drinkID: cell.drinkIdCell)
+                self.navigationController?.pushViewController(detailsVC, animated: true)
             }
             .disposed(by: disposeBag)
     }
