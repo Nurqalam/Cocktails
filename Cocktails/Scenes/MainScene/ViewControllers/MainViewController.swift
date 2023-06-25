@@ -11,9 +11,10 @@ import RxSwift
 import RxCocoa
 
 class MainViewController: ThemedViewController {
-    let items = ["Alco", "Non-Alco"]
+    let items = [Constants.nonAlcoholicCategory, Constants.alcoholicCategory]
 
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    var viewModel = DrinksViewModel()
     
     private let selectedIndex = BehaviorRelay<Int>(value: 0)
     private let disposeBag = DisposeBag()
@@ -22,6 +23,7 @@ class MainViewController: ThemedViewController {
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.identifier)
         collectionView.backgroundColor = theme.backgroundDefault
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
@@ -30,7 +32,7 @@ class MainViewController: ThemedViewController {
 
     private lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
-        bar.placeholder = "Search"
+        bar.placeholder = Constants.searchBarPlaceHolder
         return bar
     }()
 
@@ -40,10 +42,8 @@ class MainViewController: ThemedViewController {
     }
     
     private func setup() {
-        view.backgroundColor = .white
-        title = "Cocktails"
-        
         setupSegmentedControl()
+        setupCollectionView()
         setupViews()
     }
 
@@ -59,10 +59,35 @@ class MainViewController: ThemedViewController {
             .disposed(by: disposeBag)
     }
 
+    private func setupCollectionView() {
+        viewModel.drinks
+            .bind(to: collectionView.rx.items(cellIdentifier: CustomCollectionViewCell.identifier, cellType: CustomCollectionViewCell.self)) { (row, drink, cell) in
+                cell.layer.cornerRadius = 16
+                cell.clipsToBounds = true
+                cell.configure(with: drink)
+            }
+            .disposed(by: disposeBag)
+
+        collectionView.rx.itemSelected
+            .bind { [weak self] indexPath in
+                guard let self = self, let cell = self.collectionView.cellForItem(at: indexPath) as? CustomCollectionViewCell else { return }
+                print(indexPath.row)
+            }
+            .disposed(by: disposeBag)
+    }
+    
     private func setupViews() {
+        title = Constants.mainTitle
+        view.backgroundColor = theme.backgroundDefault
         view.addSubview(searchBar)
         view.addSubview(collectionView)
         
+        if let font = UIFont(name: Constants.aliceFont, size: CGFloat(Constants.titleSize)) {
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font]
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: font]
+        }
+        navigationController?.navigationBar.prefersLargeTitles = true
+
         if let segmentedControl = segmentedControl {
             view.addSubview(segmentedControl)
         }

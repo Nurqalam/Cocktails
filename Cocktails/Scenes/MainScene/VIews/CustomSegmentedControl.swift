@@ -63,6 +63,7 @@ class CustomSegmentedControl: ThemedView {
             button.setTitle(buttonTitle, for: .normal)
             button.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
             button.setTitleColor(.secondaryText, for: .normal)
+            button.titleLabel?.font = UIFont(name: Constants.aliceFont, size: CGFloat(Constants.mediumSize))
             button.backgroundColor = .clear
             buttons.append(button)
         }
