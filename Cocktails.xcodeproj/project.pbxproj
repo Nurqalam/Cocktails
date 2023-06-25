@@ -17,6 +17,11 @@
 		B573F4BC2A48837D00E5A61C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B573F4BB2A48837D00E5A61C /* RxCocoa */; };
 		B573F4BE2A48837D00E5A61C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B573F4BD2A48837D00E5A61C /* RxSwift */; };
 		B573F4C02A48841B00E5A61C /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4BF2A48841B00E5A61C /* CustomSegmentedControl.swift */; };
+		B573F4C32A48857100E5A61C /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4C22A48857100E5A61C /* UIColor+extension.swift */; };
+		B573F4C72A48859D00E5A61C /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4C62A48859D00E5A61C /* Theme.swift */; };
+		B573F4C92A4885B200E5A61C /* ThemedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4C82A4885B200E5A61C /* ThemedViewController.swift */; };
+		B573F4CB2A4885BE00E5A61C /* ThemedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4CA2A4885BE00E5A61C /* ThemedView.swift */; };
+		B573F4CE2A4885F000E5A61C /* Alice-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B573F4CD2A4885F000E5A61C /* Alice-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +32,11 @@
 		B573F4A72A487D6600E5A61C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B573F4A92A487D6600E5A61C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B573F4BF2A48841B00E5A61C /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		B573F4C22A48857100E5A61C /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		B573F4C62A48859D00E5A61C /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		B573F4C82A4885B200E5A61C /* ThemedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedViewController.swift; sourceTree = "<group>"; };
+		B573F4CA2A4885BE00E5A61C /* ThemedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedView.swift; sourceTree = "<group>"; };
+		B573F4CD2A4885F000E5A61C /* Alice-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alice-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +74,7 @@
 		B573F49A2A487D6400E5A61C /* Cocktails */ = {
 			isa = PBXGroup;
 			children = (
+				B573F4C12A48856700E5A61C /* Extensions */,
 				B573F4AF2A48814600E5A61C /* Application */,
 				B573F4B02A48818300E5A61C /* ViewControllers */,
 				B573F4B12A48819400E5A61C /* Helpers */,
@@ -93,9 +104,37 @@
 		B573F4B12A48819400E5A61C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B573F4CC2A4885D000E5A61C /* Fonts */,
+				B573F4C52A48859300E5A61C /* Theme */,
 				B573F4A42A487D6600E5A61C /* Assets.xcassets */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B573F4C12A48856700E5A61C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B573F4C22A48857100E5A61C /* UIColor+extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B573F4C52A48859300E5A61C /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				B573F4C62A48859D00E5A61C /* Theme.swift */,
+				B573F4C82A4885B200E5A61C /* ThemedViewController.swift */,
+				B573F4CA2A4885BE00E5A61C /* ThemedView.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		B573F4CC2A4885D000E5A61C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B573F4CD2A4885F000E5A61C /* Alice-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,6 +209,7 @@
 			files = (
 				B573F4A82A487D6600E5A61C /* LaunchScreen.storyboard in Resources */,
 				B573F4A52A487D6600E5A61C /* Assets.xcassets in Resources */,
+				B573F4CE2A4885F000E5A61C /* Alice-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,8 +221,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B573F4A02A487D6400E5A61C /* MainViewController.swift in Sources */,
+				B573F4C92A4885B200E5A61C /* ThemedViewController.swift in Sources */,
 				B573F49C2A487D6400E5A61C /* AppDelegate.swift in Sources */,
+				B573F4C72A48859D00E5A61C /* Theme.swift in Sources */,
 				B573F4C02A48841B00E5A61C /* CustomSegmentedControl.swift in Sources */,
+				B573F4CB2A4885BE00E5A61C /* ThemedView.swift in Sources */,
+				B573F4C32A48857100E5A61C /* UIColor+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

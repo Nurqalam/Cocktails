@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class CustomSegmentedControl: UIView {
+class CustomSegmentedControl: ThemedView {
     private var buttonTitles: [String] = []
     private var buttons: [UIButton] = []
     private var selectorView: UIView?
@@ -49,6 +49,10 @@ class CustomSegmentedControl: UIView {
         super.draw(rect)
         updateView()
     }
+
+    override func applyTheme() {
+        self.backgroundColor = theme.cover
+    }
     
     private func configureButtons() {
         buttons.removeAll()
@@ -58,6 +62,7 @@ class CustomSegmentedControl: UIView {
             let button = UIButton(type: .system)
             button.setTitle(buttonTitle, for: .normal)
             button.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
+            button.setTitleColor(.secondaryText, for: .normal)
             button.backgroundColor = .clear
             buttons.append(button)
         }
@@ -80,6 +85,7 @@ class CustomSegmentedControl: UIView {
     private func configureSelectorView() {
         let selectorWidth = frame.width / CGFloat(buttonTitles.count)
         selectorView = UIView(frame: CGRect(x: 0, y: 0, width: selectorWidth, height: frame.height))
+        selectorView?.backgroundColor = theme.primary
         selectorView?.layer.cornerRadius = frame.height / 2
         if let selectorView = selectorView {
             selectorContainer.addSubview(selectorView)
@@ -102,6 +108,7 @@ class CustomSegmentedControl: UIView {
                 button.setTitleColor(.white, for: .normal)
                 selectedSegmentIndex.accept(buttonIndex)
             } else {
+                button.setTitleColor(.secondaryText, for: .normal)
             }
         }
     }

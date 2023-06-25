@@ -7,14 +7,22 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
-class MainViewController: UIViewController {
+class MainViewController: ThemedViewController {
+    let items = ["Alco", "Non-Alco"]
 
-    private let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    
+    private let selectedIndex = BehaviorRelay<Int>(value: 0)
+    private let disposeBag = DisposeBag()
+    
     private var segmentedControl: CustomSegmentedControl?
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = theme.backgroundDefault
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         return collectionView
@@ -35,7 +43,20 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
         title = "Cocktails"
         
+        setupSegmentedControl()
         setupViews()
+    }
+
+    private func setupSegmentedControl() {
+        let segmentFrame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40)
+        segmentedControl = CustomSegmentedControl(frame: segmentFrame, buttonTitles: items)
+        
+        segmentedControl?.selectedSegmentIndex
+            .subscribe(onNext: { [weak self] index in
+                guard let self = self else { return }
+                self.selectedIndex.accept(index)
+            })
+            .disposed(by: disposeBag)
     }
 
     private func setupViews() {
