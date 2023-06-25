@@ -16,6 +16,14 @@ class DetailsViewController: ThemedViewController {
     private var disposeBag = DisposeBag()
     
     // MARK: - Outlets
+    private lazy var customAlertView: CustomAlertView = {
+        let view = CustomAlertView()
+        view.isHidden = true
+        view.layer.cornerRadius = 16
+        view.backgroundColor = theme.cover
+        return view
+    }()
+
     private lazy var imageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -87,12 +95,18 @@ class DetailsViewController: ThemedViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        hideElements()
         bindViewModel()
         backButtonSetup()
+        setupUI()
     }
     
     // MARK: - Methods
+    @objc private func retryButtonTapped() {
+        customAlertView.isHidden = true
+        viewModel?.fetchDrinkDetails()
+    }
+
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -126,13 +140,47 @@ class DetailsViewController: ThemedViewController {
                 self?.imageView.image = image
             })
             .disposed(by: disposeBag)
+        
+        viewModel.errorOccurred
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.showErrorAlert()
+            })
+            .disposed(by: disposeBag)
     }
     
+    private func hideElements() {
+        imageView.isHidden = true
+        glassContainerView.isHidden = true
+        alcoContainerView.isHidden = true
+        drinkNameLabel.isHidden = true
+        instructionsLabel.isHidden = true
+        instructionsTextView.isHidden = true
+        customAlertView.isHidden = true
+    }
+
+    private func showErrorAlert() {
+        hideElements()
+        customAlertView.isHidden = false
+        customAlertView.retryButton.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
+    }
+    
+    private func showElements() {
+        imageView.isHidden = false
+        glassContainerView.isHidden = false
+        alcoContainerView.isHidden = false
+        drinkNameLabel.isHidden = false
+        instructionsLabel.isHidden = false
+        instructionsTextView.isHidden = false
+        customAlertView.isHidden = true
+    }
+
     private func updateUI(with drinkDetail: DrinkDetail) {
         drinkNameLabel.text = drinkDetail.strDrink
         glassLabel.text = drinkDetail.strGlass
         alcoholicLabel.text = drinkDetail.strAlcoholic
         instructionsTextView.text = drinkDetail.strInstructions
+        showElements()
     }
     
     private func setupUI() {
@@ -141,6 +189,14 @@ class DetailsViewController: ThemedViewController {
         view.addSubview(drinkNameLabel)
         view.addSubview(instructionsLabel)
         view.addSubview(instructionsTextView)
+        view.addSubview(customAlertView)
+        
+        customAlertView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().inset(16)
+            make.height.equalToSuperview().multipliedBy(0.27)
+        }
         
         glassContainerView.addSubview(glassImageView)
         glassContainerView.addSubview(glassLabel)

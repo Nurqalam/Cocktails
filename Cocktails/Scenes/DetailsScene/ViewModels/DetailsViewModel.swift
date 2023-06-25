@@ -17,6 +17,7 @@ class DetailsViewModel {
     
     let drinkDetail: PublishSubject<DrinkDetail> = PublishSubject<DrinkDetail>()
     let drinkImage: PublishSubject<UIImage> = PublishSubject<UIImage>()
+    let errorOccurred: PublishSubject<Error> = PublishSubject<Error>()
 
     init(drinkID: String, networkService: NetworkService = NetworkService.shared) {
         self.drinkID = drinkID
@@ -24,14 +25,14 @@ class DetailsViewModel {
         fetchDrinkDetails()
     }
     
-    private func fetchDrinkDetails() {
+    func fetchDrinkDetails() {
         networkService.fetchDrinkDetail(by: drinkID)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] drinkDetail in
                 self?.drinkDetail.onNext(drinkDetail)
                 self?.fetchImage(from: drinkDetail.strDrinkThumb)
-            }, onError: { error in
-                print("Error: \(error)")
+            }, onError: { [weak self] error in
+                self?.errorOccurred.onNext(error)
             })
             .disposed(by: disposeBag)
     }
@@ -43,7 +44,7 @@ class DetailsViewModel {
             case .success(let imageResult):
                 self?.drinkImage.onNext(imageResult.image)
             case .failure(let error):
-                print("Error: \(error)")
+                self?.errorOccurred.onNext(error)
             }
         }
     }
