@@ -33,6 +33,7 @@
 		B573F4EB2A488CFB00E5A61C /* DrinkDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4EA2A488CFB00E5A61C /* DrinkDetailResponse.swift */; };
 		B573F4ED2A488D1A00E5A61C /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4EC2A488D1A00E5A61C /* DetailsViewModel.swift */; };
 		B573F4F22A48C62700E5A61C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4F12A48C62700E5A61C /* CustomAlertView.swift */; };
+		B573F4F62A48DCC300E5A61C /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4F52A48DCC300E5A61C /* LaunchScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		B573F4EA2A488CFB00E5A61C /* DrinkDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkDetailResponse.swift; sourceTree = "<group>"; };
 		B573F4EC2A488D1A00E5A61C /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		B573F4F12A48C62700E5A61C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		B573F4F52A48DCC300E5A61C /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				B573F4A62A487D6600E5A61C /* LaunchScreen.storyboard */,
 				B573F4A92A487D6600E5A61C /* Info.plist */,
 				B573F49B2A487D6400E5A61C /* AppDelegate.swift */,
+				B573F4F52A48DCC300E5A61C /* LaunchScreenViewController.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				B573F4A02A487D6400E5A61C /* MainViewController.swift in Sources */,
 				B573F4ED2A488D1A00E5A61C /* DetailsViewModel.swift in Sources */,
 				B573F4EB2A488CFB00E5A61C /* DrinkDetailResponse.swift in Sources */,
+				B573F4F62A48DCC300E5A61C /* LaunchScreenViewController.swift in Sources */,
 				B573F4D52A4888D800E5A61C /* CustomCollectionViewCell.swift in Sources */,
 				B573F4C92A4885B200E5A61C /* ThemedViewController.swift in Sources */,
 				B573F49C2A487D6400E5A61C /* AppDelegate.swift in Sources */,

@@ -27,6 +27,7 @@ class DetailsViewModel {
     
     func fetchDrinkDetails() {
         networkService.fetchDrinkDetail(by: drinkID)
+            .timeout(.seconds(4), scheduler: MainScheduler.instance)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] drinkDetail in
                 self?.drinkDetail.onNext(drinkDetail)
