@@ -34,6 +34,9 @@
 		B573F4ED2A488D1A00E5A61C /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4EC2A488D1A00E5A61C /* DetailsViewModel.swift */; };
 		B573F4F22A48C62700E5A61C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4F12A48C62700E5A61C /* CustomAlertView.swift */; };
 		B573F4F62A48DCC300E5A61C /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573F4F52A48DCC300E5A61C /* LaunchScreenViewController.swift */; };
+		B5A5CC4E2A71809000AD2A25 /* RateUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC4D2A71809000AD2A25 /* RateUsViewController.swift */; };
+		B5A5CC512A718FD300AD2A25 /* RatingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC502A718FD300AD2A25 /* RatingCollectionViewCell.swift */; };
+		B5A5CC532A71913400AD2A25 /* ChipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC522A71913400AD2A25 /* ChipButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +62,9 @@
 		B573F4EC2A488D1A00E5A61C /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		B573F4F12A48C62700E5A61C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		B573F4F52A48DCC300E5A61C /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		B5A5CC4D2A71809000AD2A25 /* RateUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUsViewController.swift; sourceTree = "<group>"; };
+		B5A5CC502A718FD300AD2A25 /* RatingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCollectionViewCell.swift; sourceTree = "<group>"; };
+		B5A5CC522A71913400AD2A25 /* ChipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,7 @@
 		B573F4D12A48889700E5A61C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B5A5CC4C2A71807000AD2A25 /* RateCocktailScene */,
 				B573F4D22A4888A100E5A61C /* MainScene */,
 				B573F4E52A488C9700E5A61C /* DetailsScene */,
 			);
@@ -239,6 +246,24 @@
 			isa = PBXGroup;
 			children = (
 				B573F4F12A48C62700E5A61C /* CustomAlertView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B5A5CC4C2A71807000AD2A25 /* RateCocktailScene */ = {
+			isa = PBXGroup;
+			children = (
+				B5A5CC4F2A718FC300AD2A25 /* Views */,
+				B5A5CC4D2A71809000AD2A25 /* RateUsViewController.swift */,
+			);
+			path = RateCocktailScene;
+			sourceTree = "<group>";
+		};
+		B5A5CC4F2A718FC300AD2A25 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B5A5CC502A718FD300AD2A25 /* RatingCollectionViewCell.swift */,
+				B5A5CC522A71913400AD2A25 /* ChipButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,11 +355,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5A5CC4E2A71809000AD2A25 /* RateUsViewController.swift in Sources */,
 				B573F4E12A4889ED00E5A61C /* NetworkService.swift in Sources */,
 				B573F4A02A487D6400E5A61C /* MainViewController.swift in Sources */,
 				B573F4ED2A488D1A00E5A61C /* DetailsViewModel.swift in Sources */,
 				B573F4EB2A488CFB00E5A61C /* DrinkDetailResponse.swift in Sources */,
 				B573F4F62A48DCC300E5A61C /* LaunchScreenViewController.swift in Sources */,
+				B5A5CC512A718FD300AD2A25 /* RatingCollectionViewCell.swift in Sources */,
+				B5A5CC532A71913400AD2A25 /* ChipButton.swift in Sources */,
 				B573F4D52A4888D800E5A61C /* CustomCollectionViewCell.swift in Sources */,
 				B573F4C92A4885B200E5A61C /* ThemedViewController.swift in Sources */,
 				B573F49C2A487D6400E5A61C /* AppDelegate.swift in Sources */,
