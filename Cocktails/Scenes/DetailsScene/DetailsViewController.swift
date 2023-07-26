@@ -92,6 +92,17 @@ class DetailsViewController: ThemedViewController {
         return textView
     }()
     
+    private lazy var sendButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Rate Us", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.backgroundColor = .blue
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(rateButtonTapped), for: .touchUpInside)
+        return button
+    }()
+
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +112,7 @@ class DetailsViewController: ThemedViewController {
         setupUI()
     }
     
-    // MARK: - Methods
+    // MARK: - objc Methods
     @objc private func retryButtonTapped() {
         customAlertView.isHidden = true
         viewModel?.fetchDrinkDetails()
@@ -111,6 +122,13 @@ class DetailsViewController: ThemedViewController {
         navigationController?.popViewController(animated: true)
     }
 
+    @objc private func rateButtonTapped() {
+        let vc = RateUsViewController()
+        vc.modalPresentationStyle = .popover
+        self.present(vc, animated: true)
+    }
+
+    // MARK: - Methods
     private func backButtonSetup() {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: Constants.backButton), for: .normal)
@@ -190,6 +208,7 @@ class DetailsViewController: ThemedViewController {
         view.addSubview(instructionsLabel)
         view.addSubview(instructionsTextView)
         view.addSubview(customAlertView)
+        view.addSubview(sendButton)
         
         customAlertView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
@@ -259,6 +278,11 @@ class DetailsViewController: ThemedViewController {
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(instructionsLabel.snp.bottom).offset(16)
             make.bottom.equalToSuperview().inset(16)
+        }
+        
+        sendButton.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview().inset(16)
+            make.height.equalTo(40)
         }
     }
 }
