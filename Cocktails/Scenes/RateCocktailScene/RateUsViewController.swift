@@ -27,9 +27,10 @@ class RateUsViewController: UIViewController {
         return stackView
     }()
 
+    private lazy var titleContainer = UIView()
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Rate Us"
+        label.text = "Rate cocktail"
         label.textColor = .black
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
@@ -65,6 +66,16 @@ class RateUsViewController: UIViewController {
         return collectionView
     }()
 
+    private lazy var rateDescriptionContainer = UIView()
+    private lazy var rateDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "rate from 1 to 10"
+        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .lightGray
+        return label
+    }()
+
     private lazy var likedLabel: UILabel = {
         let label = UILabel()
         label.text = "What u exactly liked"
@@ -81,6 +92,16 @@ class RateUsViewController: UIViewController {
         return stackView
     }()
 
+    private lazy var commentTextView: UITextView = {
+        let textView = UITextView()
+        textView.text = "Напишите комментарий"
+        textView.textColor = .gray
+        textView.backgroundColor = .lightGray
+        textView.font = UIFont.systemFont(ofSize: 16)
+        textView.delegate = self
+        return textView
+    }()
+
     private lazy var sendButton: UIButton = {
         let button = UIButton()
         button.setTitle("Send", for: .normal)
@@ -92,6 +113,14 @@ class RateUsViewController: UIViewController {
         return button
     }()
     
+    private func createSpacerView(height: CGFloat) -> UIView {
+        let view = UIView()
+        view.snp.makeConstraints { make in
+            make.height.equalTo(height)
+        }
+        return view
+    }
+
     // MARK: lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,34 +145,63 @@ class RateUsViewController: UIViewController {
         view.addSubview(sendButton)
         scrollView.addSubview(stackView)
         
-        stackView.addArrangedSubview(titleLabel)
+        let spacerView1 = createSpacerView(height: 15)
+        let spacerView2 = createSpacerView(height: 60)
+
+        stackView.addArrangedSubview(titleContainer)
         stackView.addArrangedSubview(descriptionLabel)
         stackView.addArrangedSubview(justView)
         
         stackView.addArrangedSubview(ratingCollectionView)
+        stackView.addArrangedSubview(rateDescriptionContainer)
         stackView.addArrangedSubview(likedLabel)
         stackView.addArrangedSubview(chipsStackView)
+        stackView.addArrangedSubview(spacerView1)
+        stackView.addArrangedSubview(commentTextView)
+        stackView.addArrangedSubview(spacerView2)
 
-        let chipTitles = ["Taste", "Appearance", "Aroma", "Aftertaste", "Overall"]
-        chipTitles.forEach { title in
-            let chipButton = ChipButton()
-            chipButton.setTitle(title, for: .normal)
-            chipButton.addTarget(self, action: #selector(chipButtonTapped(_:)), for: .touchUpInside)
-            chipsStackView.addArrangedSubview(chipButton)
+        titleContainer.addSubview(titleLabel)
+        rateDescriptionContainer.addSubview(rateDescriptionLabel)
+        
+        let chipTitles = ChipModel.getChipTitles()
+        for index in stride(from: 0, to: chipTitles.count, by: 2) {
+            let horizontalStackView = UIStackView()
+            horizontalStackView.axis = .horizontal
+            horizontalStackView.alignment = .leading
+            horizontalStackView.spacing = 10
+            horizontalStackView.distribution = .fillProportionally
+
+            for offset in 0..<2 where index + offset < chipTitles.count {
+                let title = chipTitles[index + offset]
+                let chipButton = ChipButton()
+                chipButton.setTitle(title, for: .normal)
+                chipButton.addTarget(self, action: #selector(chipButtonTapped(_:)), for: .touchUpInside)
+                
+                let wrapperView = UIView()
+                wrapperView.addSubview(chipButton)
+                
+                chipButton.snp.makeConstraints { make in
+                    make.top.bottom.equalToSuperview()
+                    make.leading.equalToSuperview()
+                    make.trailing.lessThanOrEqualToSuperview()
+                    make.width.equalTo(chipButton.intrinsicContentSize.width)
+                }
+                
+                horizontalStackView.addArrangedSubview(wrapperView)
+            }
+
+            if chipTitles.count % 2 != 0 && index == chipTitles.count - 1 {
+                let spacerView = UIView()
+                horizontalStackView.addArrangedSubview(spacerView)
+            }
+            
+            chipsStackView.addArrangedSubview(horizontalStackView)
         }
     }
 
     private func setupConstraints() {
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.left.right.equalToSuperview()
-            make.bottom.equalTo(sendButton.snp.top).offset(-15)
-        }
-
-        stackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(15)
-            make.left.right.equalTo(view.safeAreaLayoutGuide).inset(15)
-            make.bottom.equalToSuperview().offset(-15)
+            make.edges.equalToSuperview()
         }
 
         sendButton.snp.makeConstraints { make in
@@ -152,13 +210,41 @@ class RateUsViewController: UIViewController {
             make.height.equalTo(50)
         }
 
+        stackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
+            make.left.right.equalTo(view.safeAreaLayoutGuide).inset(15)
+            make.bottom.equalToSuperview().offset(-15)
+        }
+
         ratingCollectionView.snp.makeConstraints { make in
-            make.height.equalTo(90)
+            make.height.equalTo(80)
         }
         
         justView.snp.makeConstraints { make in
-            make.height.equalTo(420)
+            make.height.equalTo(250)
             make.width.equalTo(350)
+        }
+        
+        titleContainer.snp.makeConstraints { make in
+            make.height.equalTo(80)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(25)
+            make.leading.equalToSuperview().offset(10)
+        }
+        
+        rateDescriptionContainer.snp.makeConstraints { make in
+            make.height.equalTo(12)
+        }
+        
+        rateDescriptionLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(10)
+        }
+        
+        commentTextView.snp.makeConstraints { make in
+            make.left.right.equalTo(view.safeAreaLayoutGuide).inset(15)
+            make.height.equalTo(150)
         }
     }
     
@@ -192,5 +278,21 @@ extension RateUsViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RatingCell", for: indexPath) as! RatingCollectionViewCell
         cell.configure(with: indexPath.row + 1, isSelected: indexPath.row + 1 == selectedRating)
         return cell
+    }
+}
+
+extension RateUsViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .lightGray {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Напишите комментарий"
+            textView.textColor = .lightGray
+        }
     }
 }

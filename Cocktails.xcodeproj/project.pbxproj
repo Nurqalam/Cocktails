@@ -37,6 +37,7 @@
 		B5A5CC4E2A71809000AD2A25 /* RateUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC4D2A71809000AD2A25 /* RateUsViewController.swift */; };
 		B5A5CC512A718FD300AD2A25 /* RatingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC502A718FD300AD2A25 /* RatingCollectionViewCell.swift */; };
 		B5A5CC532A71913400AD2A25 /* ChipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC522A71913400AD2A25 /* ChipButton.swift */; };
+		B5A5CC562A75A42500AD2A25 /* ChipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC552A75A42500AD2A25 /* ChipModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		B5A5CC4D2A71809000AD2A25 /* RateUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUsViewController.swift; sourceTree = "<group>"; };
 		B5A5CC502A718FD300AD2A25 /* RatingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCollectionViewCell.swift; sourceTree = "<group>"; };
 		B5A5CC522A71913400AD2A25 /* ChipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipButton.swift; sourceTree = "<group>"; };
+		B5A5CC552A75A42500AD2A25 /* ChipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +255,7 @@
 		B5A5CC4C2A71807000AD2A25 /* RateCocktailScene */ = {
 			isa = PBXGroup;
 			children = (
+				B5A5CC542A75A41A00AD2A25 /* Models */,
 				B5A5CC4F2A718FC300AD2A25 /* Views */,
 				B5A5CC4D2A71809000AD2A25 /* RateUsViewController.swift */,
 			);
@@ -266,6 +269,14 @@
 				B5A5CC522A71913400AD2A25 /* ChipButton.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B5A5CC542A75A41A00AD2A25 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B5A5CC552A75A42500AD2A25 /* ChipModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,6 +386,7 @@
 				B573F4E72A488CD200E5A61C /* DetailsViewController.swift in Sources */,
 				B573F4F22A48C62700E5A61C /* CustomAlertView.swift in Sources */,
 				B573F4D82A48894600E5A61C /* DrinksViewModel.swift in Sources */,
+				B5A5CC562A75A42500AD2A25 /* ChipModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
