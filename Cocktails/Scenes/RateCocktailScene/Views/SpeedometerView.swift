@@ -8,6 +8,7 @@
 import UIKit
 
 class SpeedometerView: UIView {
+    // MARK: - properties
     var selectedValue: CGFloat = 5 {
         didSet {
             bigLabel.text = "\(Int(selectedValue))"
@@ -20,6 +21,7 @@ class SpeedometerView: UIView {
     private var progressBarBackgroundLayer: CAShapeLayer!
     private var protractorLayers: [CALayer] = []
 
+    // MARK: - elements
     private let bigLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 48)
@@ -28,6 +30,7 @@ class SpeedometerView: UIView {
         return label
     }()
     
+    // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -46,9 +49,10 @@ class SpeedometerView: UIView {
         updateView()
     }
 
+    // MARK: - methods
     private func setupView() {
         bigLabel.text = "\(Int(selectedValue))"
-        bigLabel.frame = CGRect(x: 0, y: bounds.midY + 60, width: bounds.width, height: 50)
+        bigLabel.frame = CGRect(x: 0, y: bounds.midY + 50, width: bounds.width, height: 50)
         addSubview(bigLabel)
         
         drawProtractor()
@@ -99,6 +103,7 @@ class SpeedometerView: UIView {
         }
     }
 
+    // MARK: - ProtractorView
     private func drawProtractor() {
         protractorLayers.forEach { $0.removeFromSuperlayer() }
         protractorLayers.removeAll()
@@ -151,19 +156,28 @@ class SpeedometerView: UIView {
         let path = UIBezierPath()
         let center = CGPoint(x: bounds.midX, y: bounds.midY + 100)
         let angle = .pi + selectedValue * .pi / 10
-        let arrowLength: CGFloat = 100
-        let startPoint = CGPoint(x: center.x + cos(angle) * (bounds.width / 2 - 20),
-                                 y: center.y + sin(angle) * (bounds.width / 2 - 20))
-        let endPoint = CGPoint(x: center.x + cos(angle) * (bounds.width / 2 - arrowLength),
-                               y: center.y + sin(angle) * (bounds.width / 2 - arrowLength))
+        let arrowLength: CGFloat = 70
+        let arrowWidth: CGFloat = 2.5
+        let tipWidth: CGFloat = 5
+
+        let radius = bounds.width / 2 - 99
+        let startPoint = CGPoint(x: center.x + cos(angle) * radius,
+                                 y: center.y + sin(angle) * radius)
+
+        let endPoint1 = CGPoint(x: startPoint.x + cos(angle) * arrowLength,
+                                y: startPoint.y + sin(angle) * arrowLength)
+        let endPoint2 = CGPoint(x: endPoint1.x - sin(angle) * tipWidth,
+                                y: endPoint1.y + cos(angle) * tipWidth)
+        let endPoint3 = CGPoint(x: startPoint.x - sin(angle) * arrowWidth,
+                                y: startPoint.y + cos(angle) * arrowWidth)
+
         path.move(to: startPoint)
-        path.addLine(to: endPoint)
-        path.addLine(to: CGPoint(x: endPoint.x - 10 * sin(angle),
-                                 y: endPoint.y + 10 * cos(angle)))
-        path.addLine(to: CGPoint(x: endPoint.x + 10 * sin(angle),
-                                 y: endPoint.y - 10 * cos(angle)))
+        path.addLine(to: endPoint1)
+        path.addLine(to: endPoint2)
+        path.addLine(to: endPoint3)
+        path.addLine(to: startPoint)
         path.close()
-        
+
         arrowLayer.path = path.cgPath
     }
     
