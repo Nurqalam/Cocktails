@@ -10,12 +10,13 @@ import SnapKit
 
 class RatingCollectionViewCell: UICollectionViewCell {
     
-    private lazy var ratingButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .lightGray
-        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 25
-        return button
+    private lazy var ratingLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = .black
+        label.layer.cornerRadius = 25
+        label.clipsToBounds = true
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -29,18 +30,19 @@ class RatingCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        contentView.addSubview(ratingButton)
+        contentView.addSubview(ratingLabel)
+        contentView.backgroundColor = .lightGray
+        contentView.layer.cornerRadius = 25
     }
     
     private func setupConstraints() {
-        ratingButton.snp.makeConstraints { make in
+        ratingLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
     func configure(with number: Int, isSelected: Bool) {
-        ratingButton.setTitle("\(number)", for: .normal)
-        ratingButton.backgroundColor = isSelected ? .blue : .gray
+        ratingLabel.text = "\(number)"
+        contentView.backgroundColor = isSelected ? .blue : .lightGray
     }
 }
-

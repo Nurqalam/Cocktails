@@ -9,9 +9,12 @@ import UIKit
 import SnapKit
 
 class RateUsViewController: UIViewController {
-
     // MARK: properties
-    private var selectedRating: Int?
+    private var selectedIndexPath: IndexPath? {
+        didSet {
+            ratingCollectionView.reloadData()
+        }
+    }
 
     // MARK: elements
     private lazy var scrollView: UIScrollView = {
@@ -47,10 +50,9 @@ class RateUsViewController: UIViewController {
         return label
     }()
 
-    private lazy var justView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .orange
-        view.layer.cornerRadius = 16
+    private lazy var speedometerView: SpeedometerView = {
+        let view = SpeedometerView()
+        view.backgroundColor = .clear
         return view
     }()
 
@@ -98,6 +100,7 @@ class RateUsViewController: UIViewController {
         textView.textColor = .gray
         textView.backgroundColor = .lightGray
         textView.font = UIFont.systemFont(ofSize: 16)
+        textView.layer.cornerRadius = 12
         textView.delegate = self
         return textView
     }()
@@ -127,6 +130,7 @@ class RateUsViewController: UIViewController {
         setupViews()
         setupConstraints()
         setupCollectionView()
+        speedometerView.selectedValue = 5
     }
     
     // MARK: objc methods
@@ -150,7 +154,7 @@ class RateUsViewController: UIViewController {
 
         stackView.addArrangedSubview(titleContainer)
         stackView.addArrangedSubview(descriptionLabel)
-        stackView.addArrangedSubview(justView)
+        stackView.addArrangedSubview(speedometerView)
         
         stackView.addArrangedSubview(ratingCollectionView)
         stackView.addArrangedSubview(rateDescriptionContainer)
@@ -220,7 +224,7 @@ class RateUsViewController: UIViewController {
             make.height.equalTo(80)
         }
         
-        justView.snp.makeConstraints { make in
+        speedometerView.snp.makeConstraints { make in
             make.height.equalTo(250)
             make.width.equalTo(350)
         }
@@ -235,11 +239,12 @@ class RateUsViewController: UIViewController {
         }
         
         rateDescriptionContainer.snp.makeConstraints { make in
-            make.height.equalTo(12)
+            make.height.equalTo(15)
         }
         
         rateDescriptionLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(10)
+            make.top.equalToSuperview().offset(-15)
         }
         
         commentTextView.snp.makeConstraints { make in
@@ -257,15 +262,8 @@ class RateUsViewController: UIViewController {
 
 extension RateUsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedRating = indexPath.row + 1
-        collectionView.reloadData()
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if indexPath.row + 1 == selectedRating {
-            selectedRating = nil
-        }
-        collectionView.reloadData()
+        selectedIndexPath = indexPath
+        speedometerView.selectedValue = CGFloat(indexPath.row + 1)
     }
 }
 
@@ -276,7 +274,8 @@ extension RateUsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RatingCell", for: indexPath) as! RatingCollectionViewCell
-        cell.configure(with: indexPath.row + 1, isSelected: indexPath.row + 1 == selectedRating)
+        let isSelected = indexPath == selectedIndexPath
+        cell.configure(with: indexPath.row + 1, isSelected: isSelected)
         return cell
     }
 }

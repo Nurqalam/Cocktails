@@ -38,6 +38,7 @@
 		B5A5CC512A718FD300AD2A25 /* RatingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC502A718FD300AD2A25 /* RatingCollectionViewCell.swift */; };
 		B5A5CC532A71913400AD2A25 /* ChipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC522A71913400AD2A25 /* ChipButton.swift */; };
 		B5A5CC562A75A42500AD2A25 /* ChipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC552A75A42500AD2A25 /* ChipModel.swift */; };
+		B5A5CC5B2A768B4500AD2A25 /* SpeedometerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5CC5A2A768B4500AD2A25 /* SpeedometerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		B5A5CC502A718FD300AD2A25 /* RatingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCollectionViewCell.swift; sourceTree = "<group>"; };
 		B5A5CC522A71913400AD2A25 /* ChipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipButton.swift; sourceTree = "<group>"; };
 		B5A5CC552A75A42500AD2A25 /* ChipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipModel.swift; sourceTree = "<group>"; };
+		B5A5CC5A2A768B4500AD2A25 /* SpeedometerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedometerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 		B5A5CC4C2A71807000AD2A25 /* RateCocktailScene */ = {
 			isa = PBXGroup;
 			children = (
+				B5A5CC572A7680A800AD2A25 /* ViewModels */,
 				B5A5CC542A75A41A00AD2A25 /* Models */,
 				B5A5CC4F2A718FC300AD2A25 /* Views */,
 				B5A5CC4D2A71809000AD2A25 /* RateUsViewController.swift */,
@@ -267,6 +270,7 @@
 			children = (
 				B5A5CC502A718FD300AD2A25 /* RatingCollectionViewCell.swift */,
 				B5A5CC522A71913400AD2A25 /* ChipButton.swift */,
+				B5A5CC5A2A768B4500AD2A25 /* SpeedometerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -277,6 +281,13 @@
 				B5A5CC552A75A42500AD2A25 /* ChipModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B5A5CC572A7680A800AD2A25 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,6 +386,7 @@
 				B5A5CC512A718FD300AD2A25 /* RatingCollectionViewCell.swift in Sources */,
 				B5A5CC532A71913400AD2A25 /* ChipButton.swift in Sources */,
 				B573F4D52A4888D800E5A61C /* CustomCollectionViewCell.swift in Sources */,
+				B5A5CC5B2A768B4500AD2A25 /* SpeedometerView.swift in Sources */,
 				B573F4C92A4885B200E5A61C /* ThemedViewController.swift in Sources */,
 				B573F49C2A487D6400E5A61C /* AppDelegate.swift in Sources */,
 				B573F4C72A48859D00E5A61C /* Theme.swift in Sources */,
